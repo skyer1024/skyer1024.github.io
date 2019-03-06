@@ -503,6 +503,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/article20190306/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tou.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ven">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/article20190306/" itemprop="url">Java并发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T00:00:00+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/27/article20190306/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/27/article20190306/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/02/27/article20190306/" class="leancloud_visitors" data-flag-title="Java并发">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  480字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java并发"><a href="#Java并发" class="headerlink" title="Java并发"></a>Java并发</h2><p>操作系统中存在多任务（multitasking）,即同一时刻运行多个程序的能力。</p>
+<p>线程和进程的区别</p>
+<p>每个进程有自己的变量，线程则是共享数据。</p>
+<p>创建线程的方法：</p>
+<h2 id="1-java-线程的使用"><a href="#1-java-线程的使用" class="headerlink" title="1.java 线程的使用"></a>1.java 线程的使用</h2><p>###1.1通过runnable的接口重写run方法</p>
+<p>runnable 接口适合多继承，这样的设置有利于后续的代码的扩建。</p>
+<p>实现的步骤：</p>
+<ul>
+<li><p>任务代码放入runnable中的run方法中</p>
+<ul>
+<li>runnable接口的run()方法必须重写</li>
+<li>只要将进程控制相关的代码加入即可</li>
+<li>Runnable 是一个函数式接口，可以使用lambda 表达式<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runnable r=()-&gt;&#123; task code&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>为了使用Thread的方法，需要将Runnable创建一个Thread对象</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Thread t =new Thread(r);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.start();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>样例代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class Web12306 implements Runnable&#123;</span><br><span class="line">    private int ticketNum = 99;</span><br><span class="line">    boolean flag = <span class="literal">true</span>;</span><br><span class="line">    public void <span class="function"><span class="title">run</span></span>() &#123;</span><br><span class="line">        <span class="keyword">while</span> (flag)&#123;</span><br><span class="line">            <span class="built_in">test</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>###1.2通过继承Thread父类重写run方法</p>
+<ul>
+<li>可以用Thread子类进行定义线程</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class MyThread extends Thread&#123;</span><br><span class="line">    public void <span class="function"><span class="title">run</span></span>()&#123;</span><br><span class="line">        task code</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 运行进程则只需要</span><br><span class="line"></span><br><span class="line">Mythread.start();</span><br></pre></td></tr></table></figure>
+<p>采用这种方法的已经不推荐，因为当有多个任务时候需要为每个任务实例化会带来很大的开销。</p>
+<p>###1.3 线程的api函数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Thread(Runnable target)</span><br></pre></td></tr></table></figure>
+<p>分配一个新的Thread对象。 target - 启动此线程时调用其run方法的对象。 如果null ，这个类run方法什么都不做</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void start()</span><br></pre></td></tr></table></figure>
+<p>启动线程，调用run()中的代码，这个方法将立即返回，并且新线程并发运行。</p>
+<p>###1.4 线程的中断</p>
+<p>首先没有可以强制终止线程的方法。</p>
+<p>线程在运行中执行 return 语句结束；或者出现异常线程才会终止</p>
+<p>每一个线程都有调用interrupt的方法时候就会将中断状态置位。</p>
+<hr>
+<h2 id="2-线程的属性"><a href="#2-线程的属性" class="headerlink" title="2.线程的属性"></a>2.线程的属性</h2><h2 id="3-线程的状态"><a href="#3-线程的状态" class="headerlink" title="3.线程的状态"></a>3.线程的状态</h2><p><img src="https://blog-1253977995.cos.ap-guangzhou.myqcloud.com/thread%E7%8A%B6%E6%80%81%E6%9C%BA.png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/test/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -735,7 +972,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -12,6 +12,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Java并发]]></title>
+    <url>%2F2019%2F02%2F27%2Farticle20190306%2F</url>
+    <content type="text"><![CDATA[Java并发操作系统中存在多任务（multitasking）,即同一时刻运行多个程序的能力。 线程和进程的区别 每个进程有自己的变量，线程则是共享数据。 创建线程的方法： 1.java 线程的使用###1.1通过runnable的接口重写run方法 runnable 接口适合多继承，这样的设置有利于后续的代码的扩建。 实现的步骤： 任务代码放入runnable中的run方法中 runnable接口的run()方法必须重写 只要将进程控制相关的代码加入即可 Runnable 是一个函数式接口，可以使用lambda 表达式1Runnable r=()-&gt;&#123; task code&#125;; 为了使用Thread的方法，需要将Runnable创建一个Thread对象 12Thread t =new Thread(r); 启动进程 1t.start(); 样例代码如下： 123456789public class Web12306 implements Runnable&#123; private int ticketNum = 99; boolean flag = true; public void run() &#123; while (flag)&#123; test(); &#125; &#125; ###1.2通过继承Thread父类重写run方法 可以用Thread子类进行定义线程 12345678910class MyThread extends Thread&#123; public void run()&#123; task code &#125;&#125;// 运行进程则只需要Mythread.start(); 采用这种方法的已经不推荐，因为当有多个任务时候需要为每个任务实例化会带来很大的开销。 ###1.3 线程的api函数： 1public Thread(Runnable target) 分配一个新的Thread对象。 target - 启动此线程时调用其run方法的对象。 如果null ，这个类run方法什么都不做 1void start() 启动线程，调用run()中的代码，这个方法将立即返回，并且新线程并发运行。 ###1.4 线程的中断 首先没有可以强制终止线程的方法。 线程在运行中执行 return 语句结束；或者出现异常线程才会终止 每一个线程都有调用interrupt的方法时候就会将中断状态置位。 2.线程的属性3.线程的状态]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[序]]></title>
     <url>%2F2019%2F02%2F23%2Ftest%2F</url>
     <content type="text"><![CDATA[Talk is cheap ，show me your code.12hello,guys.I decide to write my own blog while I'm coding 123我会不定期进行更新，对技术文档进行整理共勉]]></content>
